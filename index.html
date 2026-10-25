@@ -4,204 +4,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para la niña más hermosa ❤️</title>
+<title>Para alguien muy especial ❤️</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#020008;
-    color:white;
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #020008;
+    color: white;
+    overflow: hidden;
 }
 
-canvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
-#stars{
-    z-index:0;
+#stars { z-index: 0; }
+#heart { z-index: 1; }
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
 }
 
-#heart{
-    z-index:1;
+.content {
+    width: min(100%, 650px);
+    padding: 20px;
+    animation: appear 2s ease both;
 }
 
-.overlay{
-    position:fixed;
-    inset:0;
-    z-index:5;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    pointer-events:none;
+.small {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: .8;
+    margin-bottom: 20px;
 }
 
-.content{
-    width:min(90%,700px);
-    padding:30px;
-    opacity:0;
-    transform:translateY(30px);
-    animation:showContent 2s ease forwards;
-    animation-delay:2s;
+h1 {
+    font-size: clamp(40px, 9vw, 76px);
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, white, #ff8ec7, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 20px #ff4f9a);
 }
 
-.small{
-    font-size:14px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    opacity:.7;
-    margin-bottom:18px;
+.message {
+    font-size: clamp(16px, 3.5vw, 21px);
+    line-height: 1.8;
+    color: #f7eaf2;
 }
 
-h1{
-    font-size:clamp(38px,8vw,80px);
-    line-height:1;
-    margin-bottom:25px;
-    background:linear-gradient(90deg,#fff,#ff9bc9,#fff);
-    -webkit-background-clip:text;
-    color:transparent;
-    text-shadow:0 0 30px rgba(255,80,160,.4);
+.highlight {
+    color: #ff8fc7;
+    font-weight: bold;
 }
 
-.message{
-    font-size:clamp(17px,3vw,23px);
-    line-height:1.6;
-    opacity:.9;
+button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 1px solid #ff9bc9;
+    color: white;
+    background: linear-gradient(135deg, #ff4f9a, #9b36c9);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 25px #ff4f9a66;
+    transition: .3s;
 }
 
-.highlight{
-    color:#ff8fc7;
-    text-shadow:0 0 15px rgba(255,80,160,.8);
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 35px #ff4f9a;
 }
 
-button{
-    pointer-events:auto;
-    margin-top:30px;
-    padding:14px 28px;
-    border:none;
-    border-radius:50px;
-    color:white;
-    background:rgba(255,70,150,.15);
-    border:1px solid rgba(255,150,200,.5);
-    backdrop-filter:blur(10px);
-    cursor:pointer;
-    font-size:15px;
-    transition:.3s;
+#finalMessage {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    background: radial-gradient(circle, #32102d, #050008 75%);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.7);
+    transition: .6s;
 }
 
-button:hover{
-    transform:scale(1.08);
-    background:rgba(255,70,150,.3);
-    box-shadow:0 0 30px rgba(255,70,150,.4);
+#finalMessage.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
 }
 
-#finalMessage{
-    position:fixed;
-    inset:0;
-    z-index:20;
-    background:rgba(0,0,0,.92);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    opacity:0;
-    visibility:hidden;
-    transition:1.5s;
+.finalBox {
+    width: min(100%, 600px);
 }
 
-#finalMessage.active{
-    opacity:1;
-    visibility:visible;
+.finalBox .emoji {
+    font-size: clamp(65px, 15vw, 110px);
+    animation: shake .5s infinite;
 }
 
-.finalBox{
-    width:min(90%,650px);
-    padding:30px;
+.finalBox h2 {
+    margin: 20px 0;
+    font-size: clamp(45px, 11vw, 85px);
+    color: #ff70b5;
+    text-shadow: 0 0 25px #ff1689;
 }
 
-.finalBox .heart{
-    font-size:90px;
-    animation:pulse 1.5s infinite;
-    filter:drop-shadow(0 0 25px #ff3f8e);
+.finalBox p {
+    font-size: clamp(17px, 4vw, 23px);
+    line-height: 1.7;
 }
 
-.finalBox h2{
-    margin:20px 0;
-    font-size:clamp(30px,7vw,60px);
+.petal {
+    position: fixed;
+    top: -40px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall linear forwards;
 }
 
-.finalBox p{
-    font-size:19px;
-    line-height:1.7;
-    color:#ddd;
+#finalMessage button {
+    background: #ffffff18;
+    border-color: #ffffff66;
 }
 
-.petal{
-    position:fixed;
-    top:-30px;
-    z-index:10;
-    pointer-events:none;
-    animation:fall linear forwards;
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fall{
-    0%{
-        transform:translateY(-30px) rotate(0deg);
-        opacity:0;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(110vh) translateX(100px) rotate(720deg);
-        opacity:0;
+@keyframes fall {
+    to {
+        transform: translateY(110vh) translateX(80px) rotate(720deg);
+        opacity: 0;
     }
 }
 
-@keyframes showContent{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+@keyframes shake {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.12); }
 }
 
-@keyframes pulse{
-    0%,100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.18);
-    }
-}
-
-@media(max-width:600px){
-
-    .content{
-        padding:20px;
-    }
-
-    .small{
-        letter-spacing:3px;
-    }
-
-    .message{
-        font-size:16px;
-    }
-
+@media(max-height: 650px) {
+    .content { padding: 10px; }
+    h1 { margin-bottom: 15px; }
+    .message { line-height: 1.5; }
+    button { margin-top: 18px; }
 }
 </style>
 </head>
@@ -212,427 +185,208 @@ button:hover{
 <canvas id="heart"></canvas>
 
 <div class="overlay">
+    <main class="content">
 
-    <div class="content">
-
-        <div class="small">
-            Tengo algo que decirte...
-        </div>
+        <div class="small">Tengo algo que decirte... ✨</div>
 
         <h1>Para ti ❤️</h1>
 
         <p class="message">
-            No sé exactamente en qué momento
-            te volviste alguien tan especial para mí.
-            <br><br>
+         
 
-            Solo sé que entre tantas personas,
-            hay una que consigue hacer que todo
-            se sienta un poquito más bonito.
-            <br><br>
+          
+          
 
             <span class="highlight">
-                Y esa persona eres tú.
+                Por eso preparé algo solo para ti...
             </span>
         </p>
 
-        <button onclick="showFinal()">
-            Hay algo más... ✨
-        </button>
-
-    </div>
-
+        <button onclick="showFinal()">Ver más 💗</button>
+    </main>
 </div>
 
 <div id="finalMessage">
-
     <div class="finalBox">
+        <div class="emoji">🤡💗</div>
 
-        <div class="heart">❤️</div>
-
-        <h2>
-            Eres increíble.
-        </h2>
+        <h2>¡HOLA, FEA! 😂</h2>
 
         <p>
-            Tal vez esto sea solo una pequeña página,
-            pero detrás de cada estrella, cada partícula
-            y cada palabra hay una intención muy sencilla:
-            <br><br>
-
-            <strong>
-                recordarte lo hermosa y especial que eres.
-            </strong>
-            <br><br>
-
-            Y si algún día dudas de eso...
-            vuelve a mirar este cielo. 🌌
         </p>
 
-        <button onclick="closeFinal()">
-            Volver ✨
-        </button>
-
+        <button onclick="closeFinal()">Volver a caer 🤡</button>
     </div>
-
 </div>
 
 <script>
-
-/* =========================
-   ESTRELLAS
-========================= */
-
 const starsCanvas = document.getElementById("stars");
 const starsCtx = starsCanvas.getContext("2d");
 
-let W = innerWidth;
-let H = innerHeight;
+const heartCanvas = document.getElementById("heart");
+const ctx = heartCanvas.getContext("2d");
 
-starsCanvas.width = W;
-starsCanvas.height = H;
-
+let W, H;
 let stars = [];
+let particles = [];
 
-for(let i=0;i<450;i++){
+const mouse = { x: -1000, y: -1000, active: false };
 
-    stars.push({
-        x:Math.random()*W,
-        y:Math.random()*H,
-        r:Math.random()*1.7,
-        alpha:Math.random(),
-        speed:Math.random()*.01
+function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    [starsCanvas, heartCanvas].forEach(canvas => {
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + "px";
+        canvas.style.height = H + "px";
+        canvas.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
     });
 
+    createStars();
+    createHeart();
 }
 
-function drawStars(){
+function createStars() {
+    stars = Array.from({ length: 220 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.6 + .3,
+        alpha: Math.random(),
+        speed: Math.random() * .015 + .003
+    }));
+}
 
-    starsCtx.clearRect(0,0,W,H);
+function drawStars() {
+    starsCtx.clearRect(0, 0, W, H);
 
-    for(let s of stars){
-
+    stars.forEach(s => {
         s.alpha += s.speed;
 
-        if(s.alpha>1 || s.alpha<0)
-            s.speed *= -1;
+        if (s.alpha >= 1 || s.alpha <= .1) s.speed *= -1;
 
         starsCtx.beginPath();
-
-        starsCtx.arc(
-            s.x,
-            s.y,
-            s.r,
-            0,
-            Math.PI*2
-        );
-
-        starsCtx.fillStyle =
-            `rgba(255,255,255,${s.alpha})`;
-
+        starsCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        starsCtx.fillStyle = `rgba(255,255,255,${s.alpha})`;
         starsCtx.fill();
-
-    }
+    });
 
     requestAnimationFrame(drawStars);
 }
 
-drawStars();
-
-
-/* =========================
-   CORAZÓN DE PARTÍCULAS
-========================= */
-
-const canvas = document.getElementById("heart");
-const ctx = canvas.getContext("2d");
-
-canvas.width = W;
-canvas.height = H;
-
-let particles = [];
-
-const mouse = {
-    x:W/2,
-    y:H/2,
-    active:false
-};
-
-function heartFunction(t){
-
-    const x =
-        16*Math.pow(Math.sin(t),3);
-
-    const y =
-        -(13*Math.cos(t)
-        -5*Math.cos(2*t)
-        -2*Math.cos(3*t)
-        -Math.cos(4*t));
-
-    return {x,y};
+function heartFunction(t) {
+    return {
+        x: 16 * Math.pow(Math.sin(t), 3),
+        y: -(13 * Math.cos(t) - 5 * Math.cos(2*t)
+            - 2 * Math.cos(3*t) - Math.cos(4*t))
+    };
 }
 
+function createHeart() {
+    particles = [];
 
-/*
-    Creamos partículas
-    alrededor del corazón
-*/
+    const scale = Math.min(W, H) / 39;
 
-for(let i=0;i<1800;i++){
+    for (let i = 0; i < 1100; i++) {
+        const t = Math.random() * Math.PI * 2;
+        const h = heartFunction(t);
+        const radius = Math.sqrt(Math.random());
 
-    const t =
-        Math.random()*Math.PI*2;
-
-    const h =
-        heartFunction(t);
-
-    const scale =
-        Math.min(W,H)/38;
-
-    const radius =
-        Math.random();
-
-    particles.push({
-
-        x:W/2 + h.x*scale*radius,
-
-        y:H/2 + h.y*scale*radius,
-
-        baseX:W/2 + h.x*scale*radius,
-
-        baseY:H/2 + h.y*scale*radius,
-
-        size:Math.random()*2+0.3,
-
-        phase:Math.random()*Math.PI*2,
-
-        speed:Math.random()*.03+.01
-
-    });
-
+        particles.push({
+            x: W / 2 + h.x * scale * radius,
+            y: H / 2 + h.y * scale * radius,
+            size: Math.random() * 1.8 + .4,
+            phase: Math.random() * Math.PI * 2,
+            speed: Math.random() * .025 + .008
+        });
+    }
 }
 
+function animateHeart() {
+    ctx.clearRect(0, 0, W, H);
 
-/* =========================
-   MOVIMIENTO DEL MOUSE
-========================= */
-
-window.addEventListener("mousemove",(e)=>{
-
-    mouse.x=e.clientX;
-    mouse.y=e.clientY;
-    mouse.active=true;
-
-});
-
-window.addEventListener("touchmove",(e)=>{
-
-    mouse.x=e.touches[0].clientX;
-    mouse.y=e.touches[0].clientY;
-    mouse.active=true;
-
-});
-
-
-/* =========================
-   ANIMACIÓN
-========================= */
-
-function animateHeart(){
-
-    ctx.clearRect(0,0,W,H);
-
-    const scale =
-        Math.min(W,H)/38;
-
-    for(let p of particles){
-
+    particles.forEach(p => {
         p.phase += p.speed;
 
-        let targetX = p.baseX;
-        let targetY = p.baseY;
+        let x = p.x + Math.sin(p.phase) * 2;
+        let y = p.y + Math.cos(p.phase) * 2;
 
-        /*
-           Pequeña respiración
-        */
+        if (mouse.active) {
+            const dx = x - mouse.x;
+            const dy = y - mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-        const breathing =
-            Math.sin(p.phase)*1.5;
-
-        targetX += breathing;
-        targetY += breathing;
-
-        /*
-           Interacción con mouse
-        */
-
-        if(mouse.active){
-
-            const dx =
-                p.x-mouse.x;
-
-            const dy =
-                p.y-mouse.y;
-
-            const distance =
-                Math.sqrt(dx*dx+dy*dy);
-
-            if(distance<120){
-
-                const force =
-                    (120-distance)/120;
-
-                targetX +=
-                    (dx/distance)*force*35;
-
-                targetY +=
-                    (dy/distance)*force*35;
-
+            if (distance < 100 && distance > 0) {
+                const force = (100 - distance) / 100;
+                x += dx / distance * force * 25;
+                y += dy / distance * force * 25;
             }
-
         }
 
-        p.x +=
-            (targetX-p.x)*.06;
-
-        p.y +=
-            (targetY-p.y)*.06;
-
-
-        /*
-           Brillo
-        */
-
-        const glow =
-            2+
-            Math.sin(p.phase)*2;
-
         ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.shadowBlur=glow;
-
-        ctx.shadowColor=
-            "rgba(255,80,160,.9)";
-
-        ctx.fillStyle=
-            `rgba(255,${100+Math.random()*100},${170+Math.random()*80},.85)`;
-
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,${100 + Math.random()*100},190,.9)`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#ff4f9a";
         ctx.fill();
-
-        ctx.shadowBlur=0;
-
-    }
-
-    requestAnimationFrame(animateHeart);
-
-}
-
-animateHeart();
-
-
-/* =========================
-   REDIMENSIONAR
-========================= */
-
-window.addEventListener("resize",()=>{
-
-    W=innerWidth;
-    H=innerHeight;
-
-    starsCanvas.width=W;
-    starsCanvas.height=H;
-
-    canvas.width=W;
-    canvas.height=H;
-
-    particles.forEach(p=>{
-
-        p.baseX =
-            W/2 +
-            (p.baseX-W/2)
-            * (W/innerWidth);
-
-        p.baseY =
-            H/2 +
-            (p.baseY-H/2)
-            * (H/innerHeight);
-
     });
 
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(animateHeart);
+}
+
+window.addEventListener("mousemove", e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
 });
 
+window.addEventListener("touchmove", e => {
+    if (!e.touches.length) return;
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+    mouse.active = true;
+}, { passive: true });
 
-/* =========================
-   PÉTALOS
-========================= */
-
-function createPetal(){
-
-    const petal =
-        document.createElement("div");
-
-    petal.className="petal";
-
-    petal.innerHTML=
-        Math.random()>.5 ? "🌸" : "❤️";
-
-    petal.style.left=
-        Math.random()*100+"vw";
-
-    petal.style.fontSize=
-        12+Math.random()*18+"px";
-
-    petal.style.animationDuration=
-        5+Math.random()*6+"s";
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.textContent = Math.random() > .5 ? "🌸" : "❤️";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = 12 + Math.random() * 18 + "px";
+    petal.style.animationDuration = 5 + Math.random() * 5 + "s";
 
     document.body.appendChild(petal);
-
-    setTimeout(()=>{
-        petal.remove();
-    },12000);
-
+    setTimeout(() => petal.remove(), 11000);
 }
 
-setInterval(createPetal,700);
+let petalTimer;
 
+function showFinal() {
+    document.getElementById("finalMessage").classList.add("active");
 
-/* =========================
-   PANTALLA FINAL
-========================= */
-
-function showFinal(){
-
-    document
-        .getElementById("finalMessage")
-        .classList.add("active");
-
-    for(let i=0;i<30;i++){
-
-        setTimeout(
-            createPetal,
-            i*80
-        );
-
+    for (let i = 0; i < 35; i++) {
+        setTimeout(createPetal, i * 60);
     }
 
+    clearInterval(petalTimer);
+    petalTimer = setInterval(createPetal, 250);
 }
 
-function closeFinal(){
-
-    document
-        .getElementById("finalMessage")
-        .classList.remove("active");
-
+function closeFinal() {
+    document.getElementById("finalMessage").classList.remove("active");
+    clearInterval(petalTimer);
+    petalTimer = null;
 }
 
+resize();
+drawStars();
+animateHeart();
+
+window.addEventListener("resize", resize);
 </script>
 
 </body>
