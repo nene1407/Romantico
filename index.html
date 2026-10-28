@@ -1,393 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para alguien muy especial ❤️</title>
-
+<meta name="theme-color" content="#100b24">
+<title>Un pequeño universo para ti ✨</title>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    width: 100%;
-    min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #020008;
-    color: white;
-    overflow: hidden;
-}
-
-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#stars { z-index: 0; }
-#heart { z-index: 1; }
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 15px;
-}
-
-.content {
-    width: min(100%, 650px);
-    padding: 20px;
-    animation: appear 2s ease both;
-}
-
-.small {
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: .8;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: clamp(40px, 9vw, 76px);
-    margin-bottom: 25px;
-    background: linear-gradient(90deg, white, #ff8ec7, white);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 0 20px #ff4f9a);
-}
-
-.message {
-    font-size: clamp(16px, 3.5vw, 21px);
-    line-height: 1.8;
-    color: #f7eaf2;
-}
-
-.highlight {
-    color: #ff8fc7;
-    font-weight: bold;
-}
-
-button {
-    margin-top: 30px;
-    padding: 15px 30px;
-    border-radius: 50px;
-    border: 1px solid #ff9bc9;
-    color: white;
-    background: linear-gradient(135deg, #ff4f9a, #9b36c9);
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 25px #ff4f9a66;
-    transition: .3s;
-}
-
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 35px #ff4f9a;
-}
-
-#finalMessage {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-    background: radial-gradient(circle, #32102d, #050008 75%);
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(.7);
-    transition: .6s;
-}
-
-#finalMessage.active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-}
-
-.finalBox {
-    width: min(100%, 600px);
-}
-
-.finalBox .emoji {
-    font-size: clamp(65px, 15vw, 110px);
-    animation: shake .5s infinite;
-}
-
-.finalBox h2 {
-    margin: 20px 0;
-    font-size: clamp(45px, 11vw, 85px);
-    color: #ff70b5;
-    text-shadow: 0 0 25px #ff1689;
-}
-
-.finalBox p {
-    font-size: clamp(17px, 4vw, 23px);
-    line-height: 1.7;
-}
-
-.petal {
-    position: fixed;
-    top: -40px;
-    z-index: 10;
-    pointer-events: none;
-    animation: fall linear forwards;
-}
-
-#finalMessage button {
-    background: #ffffff18;
-    border-color: #ffffff66;
-}
-
-@keyframes appear {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh) translateX(80px) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-@keyframes shake {
-    0%, 100% { transform: rotate(-5deg) scale(1); }
-    50% { transform: rotate(5deg) scale(1.12); }
-}
-
-@media(max-height: 650px) {
-    .content { padding: 10px; }
-    h1 { margin-bottom: 15px; }
-    .message { line-height: 1.5; }
-    button { margin-top: 18px; }
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+:root{--night:#100b24;--pink:#ff8fb8;--cream:#fff5f8;--lav:#c5a6ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:'DM Sans',sans-serif;background:radial-gradient(ellipse at 20% 10%,#3b1d56 0,transparent 38%),radial-gradient(ellipse at 85% 70%,#321844 0,transparent 35%),var(--night);overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main{position:relative;z-index:1}
+.wrap{width:min(100% - 36px,900px);margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;color:#f7dce8;font-size:.88rem;letter-spacing:.04em}
+.logo{display:flex;gap:9px;align-items:center;font-weight:700}.logo-mark{display:grid;place-items:center;width:34px;height:34px;border:1px solid #ffffff30;border-radius:50%;background:#ffffff0b}
+.pill{border:1px solid #ffffff24;border-radius:999px;padding:9px 14px;color:#f8dce8;background:#ffffff08}
+.hero{min-height:calc(100svh - 82px);display:flex;align-items:center;justify-content:center;text-align:center;padding:44px 0 70px}
+.hero-inner{max-width:760px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #ffb9d52c;border-radius:999px;padding:9px 15px;color:#ffd5e5;background:#ff8fb80c;font-size:.82rem;letter-spacing:.04em}
+h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(3rem,9vw,6.5rem);line-height:1.04;letter-spacing:-.045em;margin:27px 0 22px}
+h1 em{font-weight:500;color:var(--pink)}
+.lead{max-width:590px;margin:0 auto;color:#dfd4e9;font-size:clamp(1rem,2.5vw,1.15rem);line-height:1.85}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+button{font:inherit;cursor:pointer;transition:transform .2s,background .2s,border-color .2s}
+button:hover{transform:translateY(-2px)}
+.primary,.secondary{border-radius:999px;padding:14px 21px}
+.primary{border:0;color:#321326;background:linear-gradient(120deg,#ffc0d7,#ff8fb8);font-weight:700;box-shadow:0 8px 35px #ff8fb826}
+.secondary{border:1px solid #ffffff35;color:#fff0f6;background:#ffffff08}
+.scroll-note{margin-top:50px;color:#bcaecb;font-size:.8rem;animation:bob 2.5s infinite}
+@keyframes bob{50%{transform:translateY(5px)}}
+section{padding:72px 0}
+.section-label{text-align:center;color:#ffb7d2;text-transform:uppercase;font-size:.76rem;letter-spacing:.19em}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:500;line-height:1.15;text-align:center;margin:13px 0 18px}
+.section-intro{max-width:570px;text-align:center;line-height:1.8;color:#d8cbe2;margin:0 auto 34px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{border:1px solid #ffffff17;background:linear-gradient(145deg,#ffffff0d,#ffffff04);border-radius:22px;padding:23px 20px;min-height:180px;backdrop-filter:blur(10px)}
+.card .symbol{font-size:1.6rem}.card h3{font-size:1rem;margin:15px 0 8px}.card p{font-size:.91rem;color:#d4c7de;line-height:1.7;margin:0}
+.letter{max-width:700px;margin:auto;border:1px solid #ffb7d226;border-radius:28px;padding:clamp(24px,5vw,48px);background:linear-gradient(145deg,#ffffff0c,#ffffff05);box-shadow:0 25px 80px #00000020}
+.letter p{color:#e8dce9;line-height:1.95;font-size:1.02rem}.letter .signature{font-family:'Playfair Display',serif;font-style:italic;font-size:1.45rem;color:#ffb7d2}
+.final{padding-bottom:90px;text-align:center}
+.final-heart{font-size:3.2rem;display:inline-block;filter:drop-shadow(0 0 20px #ff8fb866);animation:beat 1.6s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.12)}24%{transform:scale(1)}}
+footer{text-align:center;color:#a99ab8;padding:24px 0 34px;font-size:.8rem}
+#surprise{position:fixed;inset:0;z-index:5;display:none;align-items:center;justify-content:center;padding:22px;background:#0d081eeF;backdrop-filter:blur(14px)}
+#surprise.show{display:flex;animation:fade .35s ease}
+.surprise-box{width:min(100%,560px);text-align:center;padding:clamp(25px,6vw,48px);border:1px solid #ffb7d244;border-radius:30px;background:linear-gradient(145deg,#321b46,#170e2c);box-shadow:0 25px 100px #0008}
+.surprise-box h2{margin-top:15px}.surprise-box p{color:#e6d7e8;line-height:1.85}
+.close{margin-top:14px;border:1px solid #ffffff35;color:white;background:#ffffff0b;border-radius:999px;padding:12px 19px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;z-index:8;background:#fff0f6;color:#35162b;border-radius:999px;padding:12px 18px;font-size:.9rem;transition:.3s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media(max-width:650px){.cards{grid-template-columns:1fr}.card{min-height:0}.hero{padding-top:30px}.scroll-note{margin-top:38px}nav{padding-top:17px}.pill{font-size:.75rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
-
 <body>
-
-<canvas id="stars"></canvas>
-<canvas id="heart"></canvas>
-
-<div class="overlay">
-    <main class="content">
-
-        <div class="small">Tengo algo que decirte... ✨</div>
-
-        <h1>Para ti ❤️</h1>
-
-        <p class="message">
-         
-
-          
-          
-
-            <span class="highlight">
-                Por eso preparé algo solo para ti...
-            </span>
-        </p>
-
-        <button onclick="showFinal()">Ver más 💗</button>
-    </main>
+<canvas id="sky" aria-hidden="true"></canvas>
+<main>
+  <div class="wrap">
+    <nav><div class="logo"><span class="logo-mark">✦</span> un detalle para ti</div><span class="pill">hecho con cariño ♡</span></nav>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">✧ Hay personas que hacen bonito un día normal</div>
+        <h1>Quería regalarte<br><em>un pequeño universo.</em></h1>
+        <p class="lead">No encontré palabras que fueran suficientes, así que hice algo con mis propias manos. No es perfecto, pero sí tiene algo especial: un poquito del tiempo, la imaginación y la ilusión que me inspiras.</p>
+        <div class="actions">
+          <button class="primary" onclick="document.querySelector('#carta').scrollIntoView({behavior:'smooth'})">Abrir mi pequeña carta <span aria-hidden="true">♡</span></button>
+          <button class="secondary" onclick="showSurprise()">Hay una sorpresa ✨</button>
+        </div>
+        <div class="scroll-note">desliza despacito ↓</div>
+      </div>
+    </header>
+    <section>
+      <div class="section-label">un recordatorio bonito</div>
+      <h2>Lo especial está en los pequeños detalles.</h2>
+      <p class="section-intro">A veces no hace falta una gran ocasión para hacerle saber a alguien que alegra un poquito más el mundo.</p>
+      <div class="cards">
+        <article class="card"><div class="symbol">🌷</div><h3>Tu forma de ser</h3><p>Hay algo en tu manera de ser que merece ser apreciado, incluso en esos días en los que tú no lo notes.</p></article>
+        <article class="card"><div class="symbol">🌙</div><h3>Tu propia luz</h3><p>No tienes que parecerte a nadie. Lo bonito de ti está precisamente en eso que te hace ser tú.</p></article>
+        <article class="card"><div class="symbol">🪐</div><h3>Este pequeño detalle</h3><p>Un rincón digital, unas palabras sinceras y una idea sencilla para sacarte, ojalá, una sonrisa.</p></article>
+      </div>
+    </section>
+    <section id="carta">
+      <div class="section-label">con cariño, sin apuros</div>
+      <h2>Una carta pequeñita.</h2>
+      <div class="letter">
+        <p>Hola, tú. 💗</p>
+        <p>Tal vez te sorprenda recibir algo así. Quería hacer algo diferente, algo que no fuera solamente un mensaje copiado de internet. Por eso preparé esta pequeña página pensando en ti.</p>
+        <p>No quiero que sientas presión ni que tengas que responder de una manera determinada. Solo quería decirte que me pareces una persona muy especial y que me gustaría conocerte más, compartir momentos bonitos y descubrir qué puede surgir si nos damos la oportunidad.</p>
+        <p>Y si hoy consigo regalarte una sonrisa, entonces este pequeño proyecto ya habrá valido la pena.</p>
+        <p class="signature">Con una sonrisa nerviosa y mucho cariño ♡</p>
+      </div>
+    </section>
+    <section class="final">
+      <div class="final-heart">♡</div>
+      <h2>Lo bonito no necesita ser perfecto.</h2>
+      <p class="section-intro">Solo necesita ser sincero. Gracias por inspirar este pequeño detalle.</p>
+      <button class="primary" onclick="showSurprise()">Una última cosita 💌</button>
+    </section>
+    <footer>Creado con ilusión, un poco de código y mucho cariño · ✦</footer>
+  </div>
+</main>
+<div id="surprise" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle">
+  <div class="surprise-box">
+    <div style="font-size:2.6rem">🌌 💗 🌌</div>
+    <h2 id="surpriseTitle">Mi deseo para ti</h2>
+    <p>Que nunca te falten motivos para sonreír, personas que te valoren y sueños que te emocionen. Y si algún día te apetece, me gustaría tener la suerte de conocerte un poquito más. ✨</p>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;color:#ffb7d2">Sin presión. Solo quería que lo supieras.</p>
+    <button class="close" onclick="closeSurprise()">Guardaré esta sonrisa ♡</button>
+  </div>
 </div>
-
-<div id="finalMessage">
-    <div class="finalBox">
-        <div class="emoji">🤡💗</div>
-
-        <h2>¡HOLA, FEA! 😂</h2>
-
-        <p>
-        </p>
-
-        <button onclick="closeFinal()">Volver a caer 🤡</button>
-    </div>
-</div>
-
+<div id="toast" role="status">Un deseo bonito acaba de pasar ✨</div>
 <script>
-const starsCanvas = document.getElementById("stars");
-const starsCtx = starsCanvas.getContext("2d");
-
-const heartCanvas = document.getElementById("heart");
-const ctx = heartCanvas.getContext("2d");
-
-let W, H;
-let stars = [];
-let particles = [];
-
-const mouse = { x: -1000, y: -1000, active: false };
-
-function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    [starsCanvas, heartCanvas].forEach(canvas => {
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
-        canvas.style.width = W + "px";
-        canvas.style.height = H + "px";
-        canvas.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
-    });
-
-    createStars();
-    createHeart();
-}
-
-function createStars() {
-    stars = Array.from({ length: 220 }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 1.6 + .3,
-        alpha: Math.random(),
-        speed: Math.random() * .015 + .003
-    }));
-}
-
-function drawStars() {
-    starsCtx.clearRect(0, 0, W, H);
-
-    stars.forEach(s => {
-        s.alpha += s.speed;
-
-        if (s.alpha >= 1 || s.alpha <= .1) s.speed *= -1;
-
-        starsCtx.beginPath();
-        starsCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        starsCtx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-        starsCtx.fill();
-    });
-
-    requestAnimationFrame(drawStars);
-}
-
-function heartFunction(t) {
-    return {
-        x: 16 * Math.pow(Math.sin(t), 3),
-        y: -(13 * Math.cos(t) - 5 * Math.cos(2*t)
-            - 2 * Math.cos(3*t) - Math.cos(4*t))
-    };
-}
-
-function createHeart() {
-    particles = [];
-
-    const scale = Math.min(W, H) / 39;
-
-    for (let i = 0; i < 1100; i++) {
-        const t = Math.random() * Math.PI * 2;
-        const h = heartFunction(t);
-        const radius = Math.sqrt(Math.random());
-
-        particles.push({
-            x: W / 2 + h.x * scale * radius,
-            y: H / 2 + h.y * scale * radius,
-            size: Math.random() * 1.8 + .4,
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * .025 + .008
-        });
-    }
-}
-
-function animateHeart() {
-    ctx.clearRect(0, 0, W, H);
-
-    particles.forEach(p => {
-        p.phase += p.speed;
-
-        let x = p.x + Math.sin(p.phase) * 2;
-        let y = p.y + Math.cos(p.phase) * 2;
-
-        if (mouse.active) {
-            const dx = x - mouse.x;
-            const dy = y - mouse.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < 100 && distance > 0) {
-                const force = (100 - distance) / 100;
-                x += dx / distance * force * 25;
-                y += dy / distance * force * 25;
-            }
-        }
-
-        ctx.beginPath();
-        ctx.arc(x, y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,${100 + Math.random()*100},190,.9)`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = "#ff4f9a";
-        ctx.fill();
-    });
-
-    ctx.shadowBlur = 0;
-    requestAnimationFrame(animateHeart);
-}
-
-window.addEventListener("mousemove", e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    mouse.active = true;
-});
-
-window.addEventListener("touchmove", e => {
-    if (!e.touches.length) return;
-    mouse.x = e.touches[0].clientX;
-    mouse.y = e.touches[0].clientY;
-    mouse.active = true;
-}, { passive: true });
-
-function createPetal() {
-    const petal = document.createElement("div");
-    petal.className = "petal";
-    petal.textContent = Math.random() > .5 ? "🌸" : "❤️";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.fontSize = 12 + Math.random() * 18 + "px";
-    petal.style.animationDuration = 5 + Math.random() * 5 + "s";
-
-    document.body.appendChild(petal);
-    setTimeout(() => petal.remove(), 11000);
-}
-
-let petalTimer;
-
-function showFinal() {
-    document.getElementById("finalMessage").classList.add("active");
-
-    for (let i = 0; i < 35; i++) {
-        setTimeout(createPetal, i * 60);
-    }
-
-    clearInterval(petalTimer);
-    petalTimer = setInterval(createPetal, 250);
-}
-
-function closeFinal() {
-    document.getElementById("finalMessage").classList.remove("active");
-    clearInterval(petalTimer);
-    petalTimer = null;
-}
-
-resize();
-drawStars();
-animateHeart();
-
-window.addEventListener("resize", resize);
+const canvas=document.getElementById('sky'),ctx=canvas.getContext('2d');
+let w=0,h=0,dpr=1,stars=[],hearts=[],last=0;
+function resize(){dpr=Math.min(window.devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);stars=Array.from({length:Math.min(170,Math.floor(w*h/6500))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,a:Math.random()*.65+.15,s:Math.random()*.012+.003,p:Math.random()*6.28}));}
+function draw(t){ctx.clearRect(0,0,w,h);for(const s of stars){s.p+=s.s;ctx.globalAlpha=s.a*(.65+.35*Math.sin(s.p));ctx.fillStyle='#fff4fb';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+for(let i=hearts.length-1;i>=0;i--){const p=hearts[i];p.y-=p.v;p.x+=Math.sin(p.y*.025+p.phase)*.45;p.life-=.008;ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.font=`${p.size}px serif`;ctx.fillText('♥',p.x,p.y);if(p.life<=0)hearts.splice(i,1)}ctx.globalAlpha=1;requestAnimationFrame(draw)}
+function burst(){const colors=['#ff8fb8','#ffd0e2','#c5a6ff','#fff0f6'];for(let i=0;i<42;i++)hearts.push({x:Math.random()*w,y:h+Math.random()*80,v:1+Math.random()*2.2,life:.7+Math.random()*.5,size:8+Math.random()*18,color:colors[Math.floor(Math.random()*colors.length)],phase:Math.random()*7})}
+function showSurprise(){document.getElementById('surprise').classList.add('show');burst();setTimeout(burst,300)}
+function closeSurprise(){document.getElementById('surprise').classList.remove('show');const toast=document.getElementById('toast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)}
+document.getElementById('surprise').addEventListener('click',e=>{if(e.target.id==='surprise')closeSurprise()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSurprise()});
+window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);
+document.addEventListener('pointerdown',e=>{if(e.target.closest('button')){for(let i=0;i<12;i++)hearts.push({x:e.clientX+(Math.random()-.5)*80,y:e.clientY+(Math.random()-.5)*30,v:1+Math.random()*2,life:.8,size:9+Math.random()*12,color:['#ff8fb8','#c5a6ff','#fff0f6'][i%3],phase:Math.random()*7})}});
 </script>
-
 </body>
 </html>
